@@ -2,19 +2,45 @@
   "name": "electron-react-app",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Glerison Lima",
+    "email": "glerisonlima@gmail.com"
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.seu-site.seu-app",
+    "productName": "MyApp",
+    "copyright": "Copyright © 2019 Glerison Lima",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "electron-is-dev": "^1.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"set BROWSER=none && yarn start\" \"wait-on http://localhost:3000 && electron public/electron.js\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-build": "yarn build",
+    "electron-build": "electron-builder -mwl"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +56,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.13",
+    "@rescripts/rescript-env": "^0.0.11",
+    "concurrently": "^5.0.2",
+    "electron": "^7.1.9",
+    "electron-builder": "^22.2.0",
+    "typescript": "^3.7.5",
+    "wait-on": "^4.0.0"
   }
 }
